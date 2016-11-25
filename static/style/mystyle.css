@@ -1,0 +1,53 @@
+
+        * {
+            word-wrap:break-word;
+        }
+        video {
+            object-fit: fill;
+            width: 30%;
+            max-width:1066px;
+            max-height:755px;
+        }
+        #videos-container {
+            margin-left: 10%;
+            margin-right: 10%;
+            max-width: 1066px;
+        }
+        button,
+        input,
+        select {
+            font-weight: normal;
+            padding: 2px 4px;
+            text-decoration: none;
+            display: inline-block;
+            text-shadow: none;
+            font-size: 16px;
+            outline: none;
+        }
+        .make-center {
+            text-align: center;
+            padding: 5px 10px;
+        }
+        img, input, textarea {
+          max-width: 100%;
+        }
+        #alertcoach {
+            position: absolute;
+            top: 30%;
+            right: 10%;
+            left: 10%;
+            font-size: 100px;
+            color: red;
+            z-index: 8;
+        }
+
+        #mylink {
+            text-decoration: underline;
+            font-style: italic;
+        }
+        .nav li {
+            border: none;
+        }
+        .navbar {
+            font-size: 12px;
+        }
