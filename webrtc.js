@@ -1,13 +1,16 @@
+
+var PORTT = 8090;
+
 var isUseHTTPs = false && !(!!process.env.PORT || !!process.env.IP);
 
-var port = process.env.PORT || 8090;
+var port = process.env.PORT || PORTT;
 
 var autoRebootServerOnFailure = false;
 
 try {
     var config = require('./config.json');
 
-    if ((config.port || '').toString() !== '8090') {
+    if ((config.port || '').toString() !== ''+PORTT+'') {
         port = parseInt(config.port);
     }
 
