@@ -14,7 +14,7 @@
 4. Type "npm install express" to install this package : https://www.npmjs.com/package/express
 5. Type "npm install socket.io@0.9.6" to install this package : https://www.npmjs.com/package/socket.io with the version 0.9.6
 
-# Run the Server
+# Run the server
 
 1. In your folder, paste webrtc.js, Signaling-Server.js, index.html and static folder
 2. With the cmd(always in your folder), type "node webrtc.js"
