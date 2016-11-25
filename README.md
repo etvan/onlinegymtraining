@@ -8,7 +8,7 @@ Link : https://nodejs.org/
 
 2) Configuration of npm
 
-Create a new folder
+Create a new folder\n
 Open the cmd and go in your new folder with "cd"
 Type "npm init" to init npm
 Type "npm install express" to install this package : https://www.npmjs.com/package/express
