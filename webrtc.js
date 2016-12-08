@@ -54,6 +54,7 @@ function runServer() {
 
     require('./Signaling-Server.js')(app, function(socket) {
         try {
+
             var params = socket.handshake.query;
 
             if (!params.socketCustomEvent) {

@@ -36,6 +36,19 @@
         <button id='signin' class="btn btn-default">Connect</button>
       </div>
       <ul class="nav navbar-nav navbar-right">
+        <li>
+          <select id='listmusics'>
+            <option value="5Keer">5Keer</option>
+            <option value="Travelling">Travelling</option>
+          </select>
+        </li>
+        <li class="dropdown">
+          <a id='music' href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a id="musicon" style='cursor: pointer;'>ON</a></li>
+            <li><a id="musicoff" style='cursor: pointer;'>OFF</a></li>
+          </ul>
+        </li>
         <li><a id='refresh' style='cursor: pointer;'></a></li>
       </ul>
     </div>
@@ -43,6 +56,9 @@
 </nav>
 <div id='divstart' style='height: 80vh; text-align: center;'>
     <h1>Project</h1>
+    <!-- SRC : One of your songs in the folder -->
+    <audio class='classmusic' id='musicplayed' controls="controls" preload="true" hidden="true" loop="true"><source id=musicsource src='http://sofar.gr/assets/2829_ikarus.mp3' type=audio/mpeg>
+    </audio>
 </div>
             <div id='room' class="container-fluid">
             <center><div id='coachmessage'></div></center>

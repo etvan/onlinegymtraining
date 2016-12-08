@@ -3,6 +3,8 @@
             $('#range').hide();
             $('#callfromclient').hide();
             $('#refresh').hide();
+            $('#music').hide();
+            $('#listmusics').hide();
             var connection = new RTCMultiConnection();
             connection.socketURL = '/';
             connection.socketMessageEvent = 'video-conference-demo';
@@ -36,13 +38,24 @@
                 window.location.reload();
             }
 
+            var musicnow =  $("#listmusics").val();
+
             var CheminComplet = window.location.href;
             if ((CheminComplet.substring(CheminComplet.lastIndexOf( "?coach&" )+1) !== window.location.href)) {
                     document.getElementById('refresh').onclick = function() {
                         refreshclients();
                         refresh();
                     }
+                    document.getElementById('musicon').onclick = function() {
+                        onmusic();
+                    }
+                    document.getElementById('musicoff').onclick = function() {
+                        offmusic();
+                    }
                     document.getElementById('refresh').innerHTML = "Refresh";
+                    document.getElementById('music').innerHTML = "Music ";
+                    $('#listmusics').show();
+                    $('#music').show();
                     $('#navtohide').hide();
                     $('#sectionname').hide();
                     $('#room').show();
@@ -268,6 +281,20 @@
                 $('#'+event.userid+'').hide();
             };
 
+            var musicison = false;
+
+            //MESSAGE EVERY 0.5 SECOND
+
+            if (coachbool === true) {
+            setInterval(function() {
+                if (musicison === true) {
+                connection.send(['on', musicnow, $('#musicplayed')[0].currentTime]);
+                console.log('SEND : CURRENTMUSIC');   
+                $('#musicplayed')[0].play();
+                }
+            }, 500);
+            }
+
             function hangup(param) {
                 alert('HANG UP');
                 for (i=0;i<userstream.length;i++) {
@@ -336,6 +363,28 @@
                 connection.send('refresh');
             }
 
+            function onmusic() {
+                offmusic();
+                connection.send(['on', musicnow, 0]);
+                $('#musicplayed')[0].load();
+                $('#musicplayed')[0].play();
+                musicison = true;
+            }
+
+            function offmusic() {
+                connection.send('off');
+                $('.classmusic').each(function(index, element) {
+                    element.pause();
+                });
+                musicison = false;
+            }
+
+            $('#music').click(function() {
+                musicnow = $("#listmusics").val();
+                $('#musicsource').attr('src','http://www.musicscreen.be/mp3gallery/content/songs/MP3/Electro/'+musicnow+'.mp3');
+                console.log($('#musicplayed')[0].currentTime);
+            });
+
             connection.onmessage = function(event) {
                 var e = event.data;
                 var u = event.userid;
@@ -344,6 +393,31 @@
                     setTimeout(function() {
                         refresh();
                     },5000);
+                }
+                if (e[0]==='on') {
+                    //Change 'http://www.musicscreen.be/mp3gallery/content/songs/MP3/Electro/' by the folder with your musics
+                    if (e[2] === 0) {
+                        offmusic();
+                        $('#musicsource').attr('src','http://www.musicscreen.be/mp3gallery/content/songs/MP3/Electro/'+e[1]+'.mp3');
+                        $('#musicplayed')[0].load();
+                        $('#musicplayed')[0].play();
+                        musicison = true;
+                    } else {
+                        if (musicison === false) {
+                        $('#musicsource').attr('src','http://www.musicscreen.be/mp3gallery/content/songs/MP3/Electro/'+e[1]+'.mp3');
+                        $('#musicplayed')[0].load();
+                        $('#musicplayed')[0].play();
+                        $('#musicplayed')[0].currentTime = e[2];
+                        console.log('COMMENCEMENT A '+e[2]);
+                        musicison = true;
+                        }
+                    }
+                }
+                if (e==='off') {
+                    console.log('END OF MUSIC');
+                    $('.classmusic').each(function(index, element) {
+                        element.pause();
+                    });
                 }
                 if (e[0] === ouruserid) {
                     if (e[1] === 'stop') {
