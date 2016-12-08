@@ -26,4 +26,6 @@
 # Configuration of the server
 
 1. For use an other port, you just need to change the variable PORTT in webrtc.js
+2. MP3 Index : For use the mp3, add each musics between the &#60;select&#62;&#60;/select&#62; and the value of each music must be his name in the folder and in &#60;source&#62; you must change "src" by the link of one of your music
+3. MP3 code.js : For use the mp3, change the link of the folder by yours at the lines 384, 401 and 407
 
